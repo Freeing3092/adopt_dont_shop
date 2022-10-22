@@ -21,3 +21,12 @@
     <p><%= pet.name %> <%= button_to "Adopt this Pet", action: "edit", params:{ adopt: pet.id} %> </p>
   <% end %>
 <% end %>
+
+<% if !@application.pets.nil? && @application.status == 'In Progress' %>
+  <%= form_with url: "/applications/#{@application.id}/edit", method: :post do |form| %>
+    <%= form.label :good_owner_explanation, 
+    "Enter your explanation for why you would make a good owner of these pet(s)" %><br>
+    <%= form.text_area :good_owner_explanation %>
+    <%= form.submit "Submit Application" %>
+  <% end %>
+<% end %>
