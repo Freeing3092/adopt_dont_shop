@@ -7,3 +7,17 @@
 <% @application.pets.each do |pet| %>
   <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
 <% end %>
+
+<% if @application.status == 'In Progress' %>
+  <%= form_with url: "/applications/#{@application.id}", method: :post do |form| %>
+    <%= form.label :pet_name, "Add a Pet to this Application" %><br>
+    <%= form.text_field :pet_name %>
+    <%= form.submit "Submit" %>
+    <% end %>
+<% end %>
+
+<% if !@pet_search.nil? %>
+  <% @pet_search.each do |pet| %>
+    <p><%= pet.name %></p>
+  <% end %>
+<% end %>
