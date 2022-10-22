@@ -3,19 +3,28 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
+  def index
+  end
+
   def new
   end
 
   def create
     application = Application.create(application_params)
+    # binding.pry
     application[:status] = "In Progress"
-    application.save
-    
-    redirect_to "/applications/#{application.id}"
+    if application[:id].present?
+      # application.save
+      redirect_to "/applications/#{application.id}"
+    else
+      # render :new
+      redirect_to "/applications/new"
+      flash[:alert] = "Application not submitted. Required information missing."
+    end
   end
 
   def update
-    
+
   end
 
   private
