@@ -65,6 +65,25 @@ RSpec.describe 'Applications show page' do
         expect(page).to have_link("Lassie")
       end
       
+      it "pet searches returns partial search matches" do
+        visit "/applications/#{@application_1.id}"
+        
+        fill_in "pet_name", with: "Lass"
+        click_on('Submit')
+        
+        expect(page).to have_content("Lassie")
+        
+      end
+      
+      it "pet searches returns case insensitive search matches" do
+        visit "/applications/#{@application_1.id}"
+        
+        fill_in "pet_name", with: "lass"
+        click_on('Submit')
+        
+        expect(page).to have_content("Lassie")
+      end
+      
       describe 'when I have added one or more pets to the application' do
         it "Then I see a section to submit my application. And in that section
         I see an input to enter why I would make a good owner for these pet(s).
