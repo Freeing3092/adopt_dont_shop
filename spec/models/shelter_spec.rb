@@ -72,5 +72,25 @@ RSpec.describe Shelter, type: :model do
         expect(Shelter.reverse_alphabetical_order).to eq([@shelter_2, @shelter_3, @shelter_1])
       end
     end
+    describe '#pending_applications' do
+      it 'should return applications that are pending only' do
+        application_1 = @pet_1.applications.create!(name:'John Lennon',
+          street_address:'123 Fake Street',
+          city:'Denver', state:'CO', zip_code:80204,
+          description:"I'm a member of the Beatles",
+          status:'Pending')
+        # application_2 = pet_1.applications.create!(name:'Hobbit Man',
+        #   street_address:'123 Castle Street',
+        #   city:'Denver', state:'CO', zip_code:80202,
+        #   description:"I run like the wind!",
+        #   status:'Rejected')
+        # application_3 = pet_1.applications.create!(name:'Betsy Troll',
+        #   street_address:'123 Bridge Street',
+        #   city:'Denver', state:'CO', zip_code:80201,
+        #   description:"My house is a zoo.",
+        #   status:'In Progress')
+        expect(@shelter_1.pending_applications).to eq([@shelter_1.name])
+      end
+    end
   end
 end

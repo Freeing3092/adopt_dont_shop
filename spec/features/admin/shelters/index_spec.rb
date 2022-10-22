@@ -19,4 +19,6 @@ RSpec.describe 'admin shelters index page' do
       expect(@shelter_2.name).to appear_before(@shelter_1.name)
     end
   end
+
+  describe ''
 end
