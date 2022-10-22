@@ -6,7 +6,7 @@
 
 <% @application.pets.each do |pet| %>
   <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
-<% end %>
+<% end %><br>
 
 <% if @application.status == 'In Progress' %>
   <%= form_with url: "/applications/#{@application.id}", method: :post do |form| %>
@@ -18,6 +18,6 @@
 
 <% if !@pet_search.nil? %>
   <% @pet_search.each do |pet| %>
-    <p><%= pet.name %></p>
+    <p><%= pet.name %> <%= button_to "Adopt this Pet", action: "edit", params:{ adopt: pet.id} %> </p>
   <% end %>
 <% end %>

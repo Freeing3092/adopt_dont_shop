@@ -49,6 +49,20 @@ RSpec.describe 'Applications show page' do
         expect(page).to have_content("Lassie")
         expect(page).to_not have_content('Sparky')
       end
+      
+      it "pet names that match my search each have a button to 'Adopt this pet'. 
+      When I click this button I am taken back to the application show page
+      where I see the pet I want to adopt listed under the application." do
+        visit "/applications/#{@application_1.id}"
+        
+        fill_in "pet_name", with: "Lassie"
+        click_on('Submit')
+        
+        find_button("Adopt this Pet").click
+
+        expect(current_path).to eq("/applications/#{@application_1.id}")
+        expect(page).to have_link("Lassie")
+      end
     end
     
     describe 'if the application has been submitted' do
