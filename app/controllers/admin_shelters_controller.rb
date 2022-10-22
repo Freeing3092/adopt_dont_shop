@@ -1,6 +1,6 @@
 class AdminSheltersController < ApplicationController
 
   def index
-    binding.pry
+    @admin_shelters = Shelter.reverse_alphabetical_order
   end
 end
