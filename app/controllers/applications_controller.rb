@@ -11,13 +11,11 @@ class ApplicationsController < ApplicationController
 
   def create
     application = Application.create(application_params)
-    # binding.pry
     application[:status] = "In Progress"
     if application[:id].present?
-      # application.save
+      application.save
       redirect_to "/applications/#{application.id}"
     else
-      # render :new
       redirect_to "/applications/new"
       flash[:alert] = "Application not submitted. Required information missing."
     end

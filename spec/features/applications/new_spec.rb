@@ -19,15 +19,13 @@ RSpec.describe 'the application creation' do
     fill_in 'City', with: 'Denver'
     fill_in 'State', with: 'Colorado'
     fill_in 'Zip code', with: 80204
-    # fill_in 'Description', with: "I'm a member of the Beatles"
 
     click_button 'Submit'
-# binding.pry
+
     new_application_id = Application.last.id
     expect(page).to have_current_path("/applications/#{new_application_id}")
     expect(page).to have_content("Name: John Lennon")
     expect(page).to have_content("Address: 123 Fake Street Denver, Colorado 80204")
-    # expect(page).to have_content("Description: I'm a member of the Beatles")
     expect(page).to have_content("Status: In Progress")
   end
 
@@ -40,12 +38,10 @@ RSpec.describe 'the application creation' do
       fill_in 'City', with: 'Denver'
       fill_in 'State', with: 'Colorado'
       fill_in 'Zip code', with: 80204
-      # fill_in 'Description', with: "I'm a member of the Beatles"
 
       click_button 'Submit Application'
-      # new_application_id = Application.last.id
       
-      # expect(page).to have_current_path("/applications/new")
+      expect(page).to have_current_path("/applications/new")
       expect(page).to have_content("Application not submitted. Required information missing.")
       expect(page).to have_button("Submit Application")
     end
