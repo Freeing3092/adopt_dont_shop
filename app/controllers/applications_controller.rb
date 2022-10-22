@@ -4,6 +4,7 @@ class ApplicationsController < ApplicationController
     @pet_search = Pet.search(params[:pet_name]) if !params[:pet_name].nil?
   end
   
+  # Strong Params to DRY up code?
   def edit
     @application = Application.find(params[:id])
     if !params[:adopt].nil?

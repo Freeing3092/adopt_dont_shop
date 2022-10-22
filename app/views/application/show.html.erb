@@ -5,7 +5,7 @@
 <p>Status: <%= "#{@application.status}" %></p>
 
 <% @application.pets.each do |pet| %>
-  <%= link_to "#{pet.name}", "pets/#{pet.id}" %>
+  <%= link_to "#{pet.name}", "/pets/#{pet.id}" %>
 <% end %><br>
 
 <% if @application.status == 'In Progress' %>
@@ -22,7 +22,7 @@
   <% end %>
 <% end %>
 
-<% if !@application.pets.nil? && @application.status == 'In Progress' %>
+<% if !@application.pets.empty? && @application.status == 'In Progress' %>
   <%= form_with url: "/applications/#{@application.id}/edit", method: :post do |form| %>
     <%= form.label :good_owner_explanation, 
     "Enter your explanation for why you would make a good owner of these pet(s)" %><br>

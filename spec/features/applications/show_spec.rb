@@ -14,6 +14,7 @@ RSpec.describe 'Applications show page' do
     @full_address = "#{@application_1.street_address} #{@application_1.city}, #{@application_1.state} #{@application_1.zip_code}"
     
     @application_2 = Application.create!(name:'George Harrison', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, description:"I'm the quiet Beatle", status:'Pending')
+    @application_3 = Application.create!(name:'Paul McCartney', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, status:'In Progress')
     @shelter_1.pets.create(name: 'Lassie', breed: 'Rough Collie', age: 5, adoptable: true)
     @shelter_1.pets.create(name: 'Sparky', breed: 'Poodle', age: 7, adoptable: true)
   end
@@ -90,7 +91,7 @@ RSpec.describe 'Applications show page' do
       
       it "I do not see a section to submit an application if I have not added 
       any pets" do
-        visit "/applications/#{@application_2.id}"
+        visit "/applications/#{@application_3.id}"
         
         expect(page).to_not have_button("Submit Application")
       end
