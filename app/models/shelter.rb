@@ -38,12 +38,12 @@ class Shelter < ApplicationRecord
   end
 
   def pending_applications
-    binding.pry
+    # binding.pry
     # application.joins(:shelters)
     pets.joins(:applications)
         # .select(:shelter_name)
         # .where(application => {status: "Pending"})
-      # pets.pluck(:status).include?("Pending")
-    # binding.pry
-  end
-end
+        
+      end
+    end
+    # pets.pluck(:status).include?("Pending")
