@@ -18,6 +18,8 @@ RSpec.describe 'admin application show page' do
     @shelter_1.pets.create(name: 'Sparky', breed: 'Poodle', age: 7, adoptable: true)
     
     @application_1.pets << @pet_2
+    @application_2.pets << @pet_1
+    @application_2.pets << @pet_2
   end
   describe 'as a visitor' do
     it "For every pet that the application is for, I see a button to approve
@@ -36,6 +38,42 @@ RSpec.describe 'admin application show page' do
       expect(current_path).to eq("/admin/applications/#{@application_1.id}")
       expect(page).to_not have_button("Approve #{@pet_2.name}")
       expect(page).to have_content("#{@pet_2.name} Approved")
+    end
+    
+    it "For every pet that the application is for, I see a button to reject the
+    application for that specific pet When I click that button Then I'm taken
+    back to the admin application show page And next to the pet that I rejected,
+    I do not see a button to approve or reject this pet And instead I see an
+    indicator next to the pet that they have been rejected." do
+      visit "/admin/applications/#{@application_1.id}"
+      
+      expect(page).to have_button("Approve #{@pet_1.name}")
+      expect(page).to have_button("Approve #{@pet_2.name}")
+      
+      click_on("Reject #{@pet_2.name}")
+      
+      expect(current_path).to eq("/admin/applications/#{@application_1.id}")
+      expect(page).to_not have_button("Approve #{@pet_2.name}")
+      expect(page).to_not have_button("Reject #{@pet_2.name}")
+      expect(page).to have_content("#{@pet_2.name} Rejected")
+    end
+    
+    it "Accepting or rejecting an application for a pet does not impact the
+    fields to approve or reject other applications for the same pet." do
+      visit "/admin/applications/#{@application_1.id}"
+      
+      expect(page).to have_button("Approve #{@pet_1.name}")
+      expect(page).to have_button("Approve #{@pet_2.name}")
+      
+      click_on("Reject #{@pet_1.name}")
+      click_on("Approve #{@pet_2.name}")
+      
+      visit "/admin/applications/#{@application_2.id}"
+      
+      expect(page).to have_button("Approve #{@pet_1.name}")
+      expect(page).to have_button("Reject #{@pet_1.name}")
+      expect(page).to have_button("Approve #{@pet_2.name}")
+      expect(page).to have_button("Reject #{@pet_2.name}")
     end
   end
 end
