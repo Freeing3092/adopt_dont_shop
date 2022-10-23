@@ -20,3 +20,12 @@ application_3 = Application.create!(name:'Paul McCartney', street_address:'123 F
 shelter_1.pets.create(name: 'Lassie', breed: 'Rough Collie', age: 5, adoptable: true)
 shelter_1.pets.create(name: 'Sparky', breed: 'Poodle', age: 7, adoptable: true)
 
+PetApplication.create!(pet_id: 1, application_id: 1)
+PetApplication.create!(pet_id: 1, application_id: 2)
+
+# SELECT * FROM shelters
+# 	JOIN pets ON pets.shelter_id = shelters.id
+# 	JOIN pet_applications ON pet_applications.pet_id = pets.id
+# 	JOIN applications as a ON a.id = pet_applications.application_id
+# 	WHERE a.status = 'Pending'
+	

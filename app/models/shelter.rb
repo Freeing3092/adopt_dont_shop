@@ -4,8 +4,7 @@ class Shelter < ApplicationRecord
   validates :city, presence: true
 
   has_many :pets, dependent: :destroy
-  # has_many :applications
-
+  
   def self.order_by_recently_created
     order(created_at: :desc)
   end
@@ -37,13 +36,11 @@ class Shelter < ApplicationRecord
     find_by_sql("select * from shelters order by name desc") 
   end
 
-  def pending_applications
-    # binding.pry
-    # application.joins(:shelters)
-    pets.joins(:applications)
-        # .select(:shelter_name)
-        # .where(application => {status: "Pending"})
-        
-      end
-    end
-    # pets.pluck(:status).include?("Pending")
+  def self.pending_applications
+    find_by_sql("SELECT shelters.* FROM shelters
+      JOIN pets ON pets.shelter_id = shelters.id
+      JOIN pet_applications ON pet_applications.pet_id = pets.id
+      JOIN applications as a ON a.id = pet_applications.application_id
+      WHERE a.status = 'Pending'")
+  end
+end

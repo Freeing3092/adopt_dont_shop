@@ -89,7 +89,7 @@ RSpec.describe Shelter, type: :model do
         #   city:'Denver', state:'CO', zip_code:80201,
         #   description:"My house is a zoo.",
         #   status:'In Progress')
-        expect(@shelter_1.pending_applications).to eq([@shelter_1.name])
+        expect(Shelter.pending_applications).to eq([@shelter_1])
       end
     end
   end
