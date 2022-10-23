@@ -2,14 +2,18 @@
 
 <div>
 <% @application.pet_applications.each do |pet_application| %>
-    <%= pet_application.pet.name %>
     <% if pet_application.status.nil? %>
       <%= form_with url: "/admin/applications/#{@application.id}/edit", method: :patch do |form| %>
         <%= form.hidden_field :application, value: "#{pet_application.id}" %>
+        <%= form.label :pet_name, pet_application.pet.name %>
         <%= form.submit "Approve #{pet_application.pet.name}" %>
       <% end %>
     <% elsif pet_application.status == "Approve" %>
-      <span> Approved </span>
+      <%= form_with url: "/admin/applications/#{@application.id}/edit", method: :patch do |form| %>
+        <%= form.hidden_field :application, value: "#{pet_application.id}" %>
+        <%= form.label :pet_name, pet_application.pet.name %>
+        <span> Approved </span>
+      <% end %>
     <% end %>
 <% end %>
 </div>
