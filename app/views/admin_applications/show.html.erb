@@ -1,0 +1,26 @@
+<h1><%= "Application: #{@application.name}" %></h1>
+
+<div>
+<% @application.pet_applications.each do |pet_application| %>
+    <% if pet_application.status.nil? %>
+      <%= form_with url: "/admin/applications/#{@application.id}/edit", method: :patch do |form| %>
+        <%= form.hidden_field :application, value: "#{pet_application.id}" %>
+        <%= form.label :pet_name, pet_application.pet.name %>
+        <%= form.submit "Approve #{pet_application.pet.name}" %>
+        <%= form.submit "Reject #{pet_application.pet.name}" %>
+      <% end %>
+    <% elsif pet_application.status == "Approve" %>
+      <%= form_with url: "/admin/applications/#{@application.id}/edit", method: :patch do |form| %>
+        <%= form.hidden_field :application, value: "#{pet_application.id}" %>
+        <%= form.label :pet_name, pet_application.pet.name %>
+        <span> Approved </span>
+      <% end %>
+    <% elsif pet_application.status == "Reject" %>
+      <%= form_with url: "/admin/applications/#{@application.id}/edit", method: :patch do |form| %>
+        <%= form.hidden_field :application, value: "#{pet_application.id}" %>
+        <%= form.label :pet_name, pet_application.pet.name %>
+        <span> Rejected </span>
+      <% end %>
+    <% end %>
+<% end %>
+</div>
