@@ -20,6 +20,11 @@ RSpec.describe 'admin application show page' do
     @application_1.pets << @pet_2
     @application_2.pets << @pet_1
     @application_2.pets << @pet_2
+    
+    @application_1_pet_1 = @application_1.pet_applications.first
+    @application_1_pet_2 = @application_1.pet_applications.last
+    @application_2_pet_1 = @application_2.pet_applications.first
+    @application_2_pet_2 = @application_2.pet_applications.last
   end
   describe 'as a visitor' do
     it "For every pet that the application is for, I see a button to approve
@@ -84,8 +89,22 @@ RSpec.describe 'admin application show page' do
       click_on("Approve #{@pet_2.name}")
       
       expect(current_path).to eq("/admin/applications/#{@application_1.id}")
-      save_and_open_page
+      
       expect(page).to have_content("Status: Approved")
     end
+    
+    it "When all the pets on an application have been either approved or rejected, 
+    and at least 1 pet has been rejected, the application status is changed to 
+    'Rejected'." do
+      visit "/admin/applications/#{@application_1.id}"
+      
+      click_on("Reject #{@pet_1.name}")
+      click_on("Approve #{@pet_2.name}")
+      
+      expect(current_path).to eq("/admin/applications/#{@application_1.id}")
+      
+      expect(page).to have_content("Status: Rejected")
+    end
+    
   end
 end
