@@ -82,10 +82,7 @@ RSpec.describe Shelter, type: :model do
     end
     describe '#pending_applications' do
       it 'should return applications that are pending only' do
-    
-      
-  
-        expect(Shelter.pending_applications).to eq([@shelter_1])
+        expect(Shelter.pending_applications.last.name).to eq(@shelter_1.name)
       end
     end
   end
