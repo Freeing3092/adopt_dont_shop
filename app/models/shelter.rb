@@ -37,6 +37,7 @@ class Shelter < ApplicationRecord
   end
 
   def self.pending_applications
+  
     find_by_sql("SELECT shelters.* FROM shelters
       JOIN pets ON pets.shelter_id = shelters.id
       JOIN pet_applications ON pet_applications.pet_id = pets.id

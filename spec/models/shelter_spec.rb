@@ -21,6 +21,14 @@ RSpec.describe Shelter, type: :model do
     @pet_2 = @shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
     @pet_3 = @shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
     @pet_4 = @shelter_1.pets.create(name: 'Ann', breed: 'ragdoll', age: 5, adoptable: true)
+    
+    @application_1 = Application.create!(name:'John Lennon', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204)
+    @application_2 = Application.create!(name:'George Harrison', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, description:"I'm the quiet Beatle", status:'Pending')
+    @application_3 = Application.create!(name:'Paul McCartney', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, status: 'In Progress')
+    
+    @pet_application_1 = PetApplication.create!(pet_id: "#{@pet_1.id}", application_id: "#{@application_1.id}")
+    @pet_application_2 = PetApplication.create!(pet_id: "#{@pet_1.id}", application_id: "#{@application_2.id}")
+    @pet_application_3 = PetApplication.create!(pet_id: "#{@pet_3.id}", application_id: "#{@application_3.id}")
   end
 
   describe 'class methods' do
@@ -74,21 +82,9 @@ RSpec.describe Shelter, type: :model do
     end
     describe '#pending_applications' do
       it 'should return applications that are pending only' do
-        application_1 = @pet_1.applications.create!(name:'John Lennon',
-          street_address:'123 Fake Street',
-          city:'Denver', state:'CO', zip_code:80204,
-          description:"I'm a member of the Beatles",
-          status:'Pending')
-        # application_2 = pet_1.applications.create!(name:'Hobbit Man',
-        #   street_address:'123 Castle Street',
-        #   city:'Denver', state:'CO', zip_code:80202,
-        #   description:"I run like the wind!",
-        #   status:'Rejected')
-        # application_3 = pet_1.applications.create!(name:'Betsy Troll',
-        #   street_address:'123 Bridge Street',
-        #   city:'Denver', state:'CO', zip_code:80201,
-        #   description:"My house is a zoo.",
-        #   status:'In Progress')
+    
+      
+  
         expect(Shelter.pending_applications).to eq([@shelter_1])
       end
     end
