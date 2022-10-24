@@ -5,11 +5,13 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
 shelter_1 = Shelter.create(name: 'Aurora shelter', city: 'Aurora, CO', foster_program: false, rank: 9)
 shelter_2 = Shelter.create(name: 'RGV animal shelter', city: 'Harlingen, TX', foster_program: false, rank: 5)
 shelter_3 = Shelter.create(name: 'Fancy pets of Colorado', city: 'Denver, CO', foster_program: true, rank: 10)
+
 shelter_1.pets.create(name: 'Mr. Pirate', breed: 'tuxedo shorthair', age: 5, adoptable: true)
-shelter_1.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
+shelter_2.pets.create(name: 'Clawdia', breed: 'shorthair', age: 3, adoptable: true)
 shelter_3.pets.create(name: 'Lucille Bald', breed: 'sphynx', age: 8, adoptable: true)
 
 application_1 = Application.create!(name:'John Lennon', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204)
@@ -18,3 +20,10 @@ application_3 = Application.create!(name:'Paul McCartney', street_address:'123 F
 
 shelter_1.pets.create(name: 'Lassie', breed: 'Rough Collie', age: 5, adoptable: true)
 shelter_1.pets.create(name: 'Sparky', breed: 'Poodle', age: 7, adoptable: true)
+
+
+
+
+pet_application_1 = PetApplication.create!(pet_id: 1, application_id: 1)
+pet_application_2 = PetApplication.create!(pet_id: 1, application_id: 2)
+pet_application_3 = PetApplication.create!(pet_id: 3, application_id: 3)
