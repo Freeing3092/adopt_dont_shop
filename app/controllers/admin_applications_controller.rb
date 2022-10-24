@@ -5,6 +5,7 @@ class AdminApplicationsController < ApplicationController
   
   def edit
     pet_application = PetApplication.find(params[:application])
+    binding.pry
     pet_application.update({status: params[:commit].split.first})
     redirect_to "/admin/applications/#{pet_application.application_id}"
   end
