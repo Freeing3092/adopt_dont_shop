@@ -2,15 +2,15 @@
 <%= form_with url: "/shelters/#{@shelter.id}/pets", method: :post, local: true do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
-
+<br>
   <%= f.label :breed %>
   <%= f.text_field :breed %>
-
+<br>
   <%= f.label :age %>
   <%= f.number_field :age %>
-
+<br>
   <%= f.label :adoptable %>
   <%= f.check_box :adoptable, value: true %>
-
+<br>
   <%= f.submit %>
 <% end %>

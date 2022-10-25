@@ -54,8 +54,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
-# gem 'factory_bot_rails'
-# gem 'faker'
+
 #could use factory bot and faker to make seed data
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
