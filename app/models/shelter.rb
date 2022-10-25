@@ -7,6 +7,7 @@ class Shelter < ApplicationRecord
   validates :name, length: { maximum: 35 }
   validates :city, length: { maximum: 19 }
   validates :rank, length: { maximum: 3 }
+
   
   def self.order_by_recently_created
     order(created_at: :desc)

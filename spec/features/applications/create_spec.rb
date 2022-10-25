@@ -27,18 +27,6 @@ RSpec.describe 'the application creation' do
     expect(page).to have_content("Status: In Progress")
   end
 
-  # describe "the application sign up process", type: :feature do
-  #   it 'shows the whole application process' do
-  #     @application_1 = Application.create!(id: 1, name:'John Lennon', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, status:'Pending')
-  #     visit "/applications/#{@application_1.id}"
-  #     within("#create") do
-  #       fill_in 'Add a Pet to this Application', with: 'L'
-  #     end
-  #     click_button 'Submit'
-  #     expect(page).to have_content("Lassie")
-  #   end
-  # end
-
   describe 'takes you back to new application page when form not completely filled out' do
     it 'shows that visitor will need to fill those empty fields' do
       visit '/applications/new'

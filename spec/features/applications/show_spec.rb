@@ -123,5 +123,13 @@ RSpec.describe 'Applications show page' do
         expect(page).to_not have_content('Add a Pet to this Application')
       end
     end
+    describe "'Add a Pet to this Application' form length limit" do
+      it 'returns an error when length is too long' do
+        visit "applications/#{@application_1.id}"
+
+        fill_in "pet_name" with: "lassielassielassielassielassielassielassielassie"
+        
+      end
+    end
   end
 end
