@@ -14,6 +14,9 @@ class AdminApplicationsController < ApplicationController
     application = pet_application.application
     if !pet_application.rejected_pets? && !pet_application.null_pets?
       application.update({status: 'Approved'})
+      application.pets.each do |pet| 
+        pet.update!({adoptable: false})
+      end
     elsif pet_application.rejected_pets? && !pet_application.null_pets?
       application.update({status: 'Rejected'})
     end
