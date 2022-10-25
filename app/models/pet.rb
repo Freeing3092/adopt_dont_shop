@@ -8,6 +8,7 @@ class Pet < ApplicationRecord
   validates :name, length: { maximum: 30 }
   validates :breed, length: { maximum: 30 }
   validates :age, length: { maximum: 2 }
+  
   def shelter_name
     shelter.name
   end
