@@ -27,6 +27,18 @@ RSpec.describe 'the application creation' do
     expect(page).to have_content("Status: In Progress")
   end
 
+  # describe "the application sign up process", type: :feature do
+  #   it 'shows the whole application process' do
+  #     @application_1 = Application.create!(id: 1, name:'John Lennon', street_address:'123 Fake Street', city:'Denver', state:'CO', zip_code:80204, status:'Pending')
+  #     visit "/applications/#{@application_1.id}"
+  #     within("#create") do
+  #       fill_in 'Add a Pet to this Application', with: 'L'
+  #     end
+  #     click_button 'Submit'
+  #     expect(page).to have_content("Lassie")
+  #   end
+  # end
+
   describe 'takes you back to new application page when form not completely filled out' do
     it 'shows that visitor will need to fill those empty fields' do
       visit '/applications/new'
@@ -40,6 +52,27 @@ RSpec.describe 'the application creation' do
       
       expect(page).to have_current_path("/applications/new")
       expect(page).to have_content("Error: Name can't be blank")
+      expect(page).to have_button("Submit Application")
+    end
+  end
+
+  describe 'test maximum character validations' do
+    it 'will return an error message' do
+      visit '/applications/new'
+
+      fill_in 'Name', with: 'BobBobBobBobBobBobBobBobBobBobBobBob'
+      fill_in 'Street address', with: '123 Fake Street123 Fake Street123 Fake Street'
+      fill_in 'City', with: 'DenverDenverDenverDenverDenver'
+      fill_in 'State', with: 'ColoradoColoradoColoradoColorado'
+      fill_in 'Zip code', with: 802048020480204
+
+      click_button 'Submit Application'
+      
+      expect(page).to have_content("Error: Name is too long (maximum is 30 characters)")
+      expect(page).to have_content("City is too long (maximum is 17 characters)")
+      expect(page).to have_content("State is too long (maximum is 13 characters)")
+      expect(page).to have_content("Zip code is too long (maximum is 5 characters)")
+      expect(page).to have_current_path("/applications/new")
       expect(page).to have_button("Submit Application")
     end
   end
