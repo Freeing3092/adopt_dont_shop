@@ -10,6 +10,10 @@ RSpec.describe Shelter, type: :model do
     it { should validate_presence_of(:city) }
     it { should validate_presence_of(:rank) }
     it { should validate_numericality_of(:rank) }
+
+    it { should validate_length_of :name }
+    it { should validate_length_of :city }
+    it { should validate_length_of :rank }
   end
 
   before(:each) do

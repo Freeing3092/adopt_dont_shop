@@ -11,6 +11,10 @@ RSpec.describe Pet, type: :model do
     it { should validate_presence_of(:name) }
     it { should validate_presence_of(:age) }
     it { should validate_numericality_of(:age) }
+   
+    it { should validate_length_of :name }
+    it { should validate_length_of :breed }
+    it { should validate_length_of :age }
   end
 
   before(:each) do

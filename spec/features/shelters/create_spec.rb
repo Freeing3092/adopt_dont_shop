@@ -41,4 +41,21 @@ RSpec.describe 'shelter creation' do
       end
     end
   end
+
+  describe 'shelters validations' do
+    it 'will return an error if input lengths are too long' do
+      visit '/shelters/new'
+
+      fill_in 'Name', with: 'Houston ShelterHouston ShelterHouston Shelter'
+      fill_in 'City', with: 'HoustonHoustonHouston'
+      check 'Foster program'
+      fill_in 'Rank', with: 7777
+      click_button 'Save'
+
+      expect(page).to have_content("Error: Name is too long (maximum is 35 characters)")
+      expect(page).to have_content("City is too long (maximum is 19 characters)")
+      expect(page).to have_content("Rank is too long (maximum is 3 characters)")
+      expect(page).to have_current_path('/shelters/new')
+    end 
+  end
 end
